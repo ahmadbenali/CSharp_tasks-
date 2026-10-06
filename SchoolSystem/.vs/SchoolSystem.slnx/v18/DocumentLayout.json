@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\a7mad\\Desktop\\c#\\SchoolSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C984A165-D1E1-49CE-8715-64FB30053A4E}|SchoolSystem\\SchoolSystem.csproj|c:\\users\\a7mad\\desktop\\c#\\schoolsystem\\schoolsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C984A165-D1E1-49CE-8715-64FB30053A4E}|SchoolSystem\\SchoolSystem.csproj|solutionrelative:schoolsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\a7mad\\Desktop\\c#\\SchoolSystem\\SchoolSystem\\Program.cs",
+              "RelativeDocumentMoniker": "SchoolSystem\\Program.cs",
+              "ToolTip": "C:\\Users\\a7mad\\Desktop\\c#\\SchoolSystem\\SchoolSystem\\Program.cs",
+              "RelativeToolTip": "SchoolSystem\\Program.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAADwvzIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-06T10:59:18.107Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+C:\Users\a7mad\Desktop\c#\SchoolSystem\SchoolSystem\bin\Debug\SchoolSystem.exe.config
+C:\Users\a7mad\Desktop\c#\SchoolSystem\SchoolSystem\bin\Debug\SchoolSystem.exe
+C:\Users\a7mad\Desktop\c#\SchoolSystem\SchoolSystem\bin\Debug\SchoolSystem.pdb
+C:\Users\a7mad\Desktop\c#\SchoolSystem\SchoolSystem\obj\Debug\SchoolSystem.csproj.AssemblyReference.cache
+C:\Users\a7mad\Desktop\c#\SchoolSystem\SchoolSystem\obj\Debug\SchoolSystem.csproj.CoreCompileInputs.cache
+C:\Users\a7mad\Desktop\c#\SchoolSystem\SchoolSystem\obj\Debug\SchoolSystem.exe
+C:\Users\a7mad\Desktop\c#\SchoolSystem\SchoolSystem\obj\Debug\SchoolSystem.pdb
