@@ -7,46 +7,36 @@ namespace SchoolSystem
     {
         static void Main(string[] args)
         {
-            string studentName = "Sami Ali";
-            int studentAge = 20;
-            int studentGrade = 12;
-            double studentAvg = 85.5;
-            char studentGender = 'M';
-            bool studentActive = true;
+            
 
-            Console.WriteLine("Student Name: " + studentName);
-            Console.WriteLine("Student Age: " + studentAge);
-            Console.WriteLine("Student Grade: " + studentGrade);
-            Console.WriteLine("Student Average: " + studentAvg);
-            Console.WriteLine("Student Gender: " + studentGender);
-            Console.WriteLine("Student Active: " + studentActive);
+            string result = "Hello, " + "World!";
+            Console.WriteLine(result);
 
-            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++");
 
-            string[] student = { "Sami Ali", "John Doe", "Jane Smith" ,"Ahmad al-Rashid"};
+            string name = "ALICE";
+            Console.WriteLine(name.ToLower());
 
-            Console.WriteLine("\nStudent List:");
-            Console.WriteLine($"Student 1:  {student[0]}");
-            Console.WriteLine($"Student 2:  {student[1]}");
-            Console.WriteLine($"Student 3:  {student[2]}");
-            Console.WriteLine($"Student 4:  {student[3]}");
+            Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++");
 
-            Console.WriteLine($"Number of Students: {student.Length}");
+            string name2 = "alice";
+            Console.WriteLine(name2.ToUpper());
 
+            Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++");
 
-            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            Console.WriteLine("\nStudent Before Update:");
-            Console.WriteLine($"Student 1:  {student[0]}");
-            Console.WriteLine($"Student 2:  {student[1]}");
-            Console.WriteLine($"Student 3:  {student[2]}");
-            Console.WriteLine($"Student 4:  {student[3]}");
+            string userName = "alice";
+            int age = 96;
+            Console.WriteLine(userName + " is " + age + " years old.");
 
-            student[2] = "Ali Hassan";
-            Console.WriteLine("\nStudent After Update:");
-            Console.WriteLine($"Student 1:  {student[0]}");
-            Console.WriteLine($"Student 2:  {student[1]}");
-            Console.WriteLine($"Student 3:  {student[2]}");
-            Console.WriteLine($"Student 4:  {student[3]}");
+            Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++");
+
+            string userName2 = "alice";
+            int beforeBalance = 1000;
+            int afterBalance = 500;
+            Console.WriteLine(beforeBalance + afterBalance + " " + userName2);
+
+            Console.WriteLine(userName2 + " " + beforeBalance + afterBalance);
+
 
 
         }
