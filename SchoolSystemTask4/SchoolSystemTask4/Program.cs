@@ -11,16 +11,15 @@ namespace SchoolSystemTask4
     {
         static void Main(string[] args)
         {
-        
 
-            Console.WriteLine("\n===== Manager =====");
+            Student student = new Student("Ahmad", 20, 85);
+            student.DisplayInfo();
+            student = new Student("Ali", 22, 90);
+            student.DisplayInfo();
+            student = new Student("Sara", 19, 95);
+            student.DisplayInfo();
 
-            Manager manager = new Manager(
-                "Ali", 102, -3, "HR", 8);
 
-            manager.DisplayManagerInfo();
-
-  
         }
     }
 
