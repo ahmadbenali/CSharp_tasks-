@@ -59,7 +59,7 @@ namespace SchoolSystemTask3
 
             void SearchStudent()
             {
-                Console.WriteLine("Enter the name of the student to search for:");
+                Console.WriteLine("Enter the grade of the student to search for:");
                 string name = Console.ReadLine();
                 string[] students = { "Alice", "Bob", "Charlie", "David" };
                 if (students.Contains(name))

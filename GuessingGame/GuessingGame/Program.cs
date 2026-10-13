@@ -41,7 +41,6 @@ namespace GuessingGame
                 }
             }
 
-            // Calculate points
             if (attempts == 1)
             {
                 points = 10;

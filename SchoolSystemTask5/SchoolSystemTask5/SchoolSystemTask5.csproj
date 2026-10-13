@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{024AE815-CAC6-4D55-96C0-34060062A699}</ProjectGuid>
+    <ProjectGuid>{3E2789E3-0CAB-46F2-A943-73DD27EF4008}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SchoolSystemTask4</RootNamespace>
-    <AssemblyName>SchoolSystemTask4</AssemblyName>
+    <RootNamespace>SchoolSystemTask5</RootNamespace>
+    <AssemblyName>SchoolSystemTask5</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,8 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchoolReport.cs" />
+    <Compile Include="Student.cs" />
+    <Compile Include="Teacher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
