@@ -18,7 +18,7 @@ namespace SchoolSystemTask5
         public void DisplayTeacherInfo()
         {
             DisplayInfo();
-            Console.WriteLine($"Subject: {Subject}");
+            Console.WriteLine($" Subject: {Subject}");
         }
     }
 }

@@ -18,7 +18,14 @@ namespace AdventureGame
             foreach(GameCharacter character in characters)
             {
                 HealthPotion potion = new HealthPotion { potionName = "Health Potion" };
-                Console.WriteLine($"Character: {character.Name}");
+                if(character is Wizard)
+                {
+                    Console.WriteLine($"Wizard {character.Name} enters the game!");
+                }
+                else if (character is Warrior)
+                {
+                    Console.WriteLine($"Warrior {character.Name} enters the game!");
+                }
 
                 character.UseSpecialAbility();
                 character.TakeDamage(20);
@@ -28,7 +35,7 @@ namespace AdventureGame
                 character.Heal(10);
                 potion.Collect();
 
-                potion.Use(character, "25");
+                potion.Use(character, "5");
 
                 Console.WriteLine("+++++++++++++++++++++++++++");
 
