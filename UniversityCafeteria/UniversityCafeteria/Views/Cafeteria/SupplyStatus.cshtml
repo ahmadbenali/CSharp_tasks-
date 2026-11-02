@@ -1,5 +1,77 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "";
+    
+    var products = new List<dynamic>
+    {
+        new { Product = "Water", Supplier = "Fresh Food Company", Quantity = 100, Status = "Available" },
+        new { Product = "Orange Juice", Supplier = "Happy Drinks Company", Quantity = 20, Status = "Low Stock" },
+        new { Product = "Coffee", Supplier = "Daily Supplies Company", Quantity = 50, Status = "Available" },
+        new { Product = "Sandwich", Supplier = "Fresh Food Company", Quantity = 0, Status = "Out of Stock" },
+        new { Product = "Chocolate", Supplier = "Daily Supplies Company", Quantity = 30, Status = "Available" }
+    };
 }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/products.css" asp-append-version="true" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container" >
+        <h2>Supply Status</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Supplier</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in products)
+                {
+                    @if(product.Status == "Available")
+                    {
+                        <tr class="table-success">
+                            <td>@product.Product</td>
+                            <td>@product.Supplier</td>
+                            <td>@product.Quantity</td>
+                            <td>@product.Status</td>
+                        </tr>
+                    }else if(product.Status == "Low Stock")
+                    {
+                        <tr class="table-warning">
+                            <td>@product.Product</td>
+                            <td>@product.Supplier</td>
+                            <td>@product.Quantity</td>
+                            <td>@product.Status</td>
+                        </tr>
+                    }
+                    else if(product.Status == "Out of Stock")
+                    {
+                        <tr class="table-danger">
+                            <td>@product.Product</td>
+                            <td>@product.Supplier</td>
+                            <td>@product.Quantity</td>
+                            <td>@product.Status</td>
+                        </tr>
+                    }
+                }   
+            </tbody>
+        </table>
+    </div>
+   
+               
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - UniversityCafeteria 
+        </div>
+    </footer>
+</body>
+</html>
+
