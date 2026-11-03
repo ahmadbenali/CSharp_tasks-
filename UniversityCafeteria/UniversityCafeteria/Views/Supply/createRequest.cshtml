@@ -1,0 +1,38 @@
+﻿<h1>Create Request</h1>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert @(ViewBag.IsError ? "alert-danger" : "alert-success")">
+        @ViewBag.Message
+    </div>
+}
+
+<form asp-controller="Supply" asp-action="SubmitRequest" method="post">
+    <div class="mb-3">
+        <label class="form-label">Employee Name</label>
+        <input type="text" name="EmployeeName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        <select name="ProductName" class="form-select">
+            <option>Water</option>
+            <option>Orange Juice</option>
+            <option>Coffee</option>
+            <option>Sandwich</option>
+            <option>Chocolate</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" name="Quantity" class="form-control" required min="1" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Required Date</label>
+        <input type="date" name="RequiredDate" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

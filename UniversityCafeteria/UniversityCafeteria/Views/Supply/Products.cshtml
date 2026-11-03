@@ -1,0 +1,18 @@
+﻿@{
+}
+<h1>@ViewData["title"]</h1>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        <h2 class="h5 mb-0">@ViewData["name"]</h2>
+    </div>
+
+    <div class="card-body">
+        @foreach (var c in (List<string>)ViewData["products"]!)
+        {
+            <p class="card-text">@c</p>
+        }
+    </div>
+
+    <div class="card-footer text-muted">Updated today</div>
+</div>
