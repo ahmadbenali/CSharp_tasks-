@@ -1,0 +1,27 @@
+﻿@using UniversityCafeteria.Models
+@model List<Item>
+@{
+}
+
+
+<table class="table mt-4">
+    <tr>
+        <th>Product</th><th>Category</th><th>Qty</th>
+        <th>Price</th><th>Total</th><th>Priority</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.productName</td>
+            <td>@item.category</td>
+            <td>@item.quantity</td>
+            <td>@item.unitPrice</td>
+            <td>@item.total</td>
+            <td>@item.priority</td>
+        </tr>
+    }
+    <tr>
+        <th colspan="4" class="text-end">Subtotal</th>
+        <th colspan="2">@Model.Sum(x => x.total)</th>
+    </tr>
+</table>

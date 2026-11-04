@@ -1,0 +1,82 @@
+﻿@using UniversityCafeteria.Models
+
+@{
+    string saved = ViewBag.PreferredPriority ?? "";
+}
+
+<h1>Add Product to Supply Request</h1>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<p>
+    Products in current draft: <strong>@ViewBag.Count</strong>
+    <a asp-action="Review">Review</a>
+</p>
+
+@if (saved != "")
+{
+    <div class="alert alert-info">
+        Your preferred request priority is <strong>@saved</strong>.
+    </div>
+}
+
+<form asp-action="SavePreference" method="post" class="col-md-5 mb-4">
+    <label class="form-label">Default Request Priority</label>
+    <div class="input-group">
+        <select name="priority" class="form-select">
+            <option selected="@(saved == "Normal")">Normal</option>
+            <option selected="@(saved == "Urgent")">Urgent</option>
+            <option selected="@(saved == "Emergency")">Emergency</option>
+        </select>
+        <button type="submit" class="btn btn-secondary">Save Preference</button>
+    </div>
+</form>
+
+<form asp-controller="SupplyRequest" asp-action="AddItem" method="post" class="col-md-5">
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="text" name="productName" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <select name="category" class="form-select">
+            <option>Drinks</option>
+            <option>Food</option>
+            <option>Snacks</option>
+            <option>Hot Drinks</option>
+            <option>Cold Drinks</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="number" name="quantity" class="form-control" min="1" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Unit Price</label>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="number" name="unitPrice" class="form-control" min="0" step="0.01" required />
+    </div>
+
+    <select name="priority" class="form-select">
+            <option selected="@(saved == "Normal")">Normal</option>
+            <option selected="@(saved == "Urgent")">Urgent</option>
+            <option selected="@(saved == "Emergency")">Emergency</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>
+
+

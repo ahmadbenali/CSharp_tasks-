@@ -1,0 +1,42 @@
+﻿@using UniversityCafeteria.Models
+@model List<Item>
+@{
+}
+<table class="table mt-4">
+    <tr>
+        <th>Description</th><th>Amount</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.productName (@item.quantity &times; @item.unitPrice)</td>
+            <td>@item.total</td>
+        </tr>
+    }
+    <tr>
+        <td>Subtotal</td>
+        <td >@ViewBag.Subtotal</td>
+    </tr>
+    <tr>
+        <td >PreparationFee</td>
+        <td >@ViewBag.PreparationFee</td>
+    </tr>
+    <tr>
+        <td >Discount</td>
+        <td >@ViewBag.Discount</td>
+    </tr>
+    <tr>
+        <td >FinalTotal</td>
+        <td ">@ViewBag.FinalTotal</td>
+    </tr>
+</table>
+
+<div class="d-flex gap-2">
+    <form asp-action="ConfirmRequest" method="post">
+        <button type="submit" class="btn btn-success">Confirm Request</button>
+    </form>
+    <form asp-action="ClearDraft" method="post">
+        <button type="submit" class="btn btn-outline-danger">Clear Draft</button>
+    </form>
+</div>
+
