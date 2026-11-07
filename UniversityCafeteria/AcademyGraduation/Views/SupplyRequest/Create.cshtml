@@ -1,0 +1,47 @@
+@model List<OfferInfo>
+@{
+    ViewData["Title"] = "Create Supply Request";
+    List<int> selectedIds = ViewBag.SelectedIds ?? new List<int>();
+}
+
+<h1>Create Supply Request</h1>
+<p>Select one offer from each category.</p>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form asp-action="Create" method="post">
+    @foreach (var group in Model.GroupBy(o => o.CategoryId))
+    {
+        <h3 class="mt-4">@group.First().CategoryName</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Supplier</th>
+                    <th>Offer</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var offer in group)
+                {
+                    <tr>
+                        <td>
+                            <input type="radio" name="cat@(group.Key)" value="@offer.Id" checked="@selectedIds.Contains(offer.Id)" />
+                        </td>
+                        <td>@offer.SupplierName</td>
+                        <td>@offer.OfferName</td>
+                        <td>@offer.Quantity</td>
+                        <td>@offer.UnitPrice JD</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <button type="submit" class="btn btn-primary">Review Request</button>
+</form>
