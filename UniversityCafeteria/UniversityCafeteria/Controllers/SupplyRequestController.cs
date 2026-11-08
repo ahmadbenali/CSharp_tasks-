@@ -1,11 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+using UniversityCafeteria.Data;
 using UniversityCafeteria.Models;
+
 
 namespace UniversityCafeteria.Controllers
 {
     public class SupplyRequestController : Controller
     {
+
+        private readonly CafeteriaDbContext _db;
+
+        public SupplyRequestController(CafeteriaDbContext db)
+        {
+            _db = db;
+        }
+
         private const string SessionKey = "SupplyItems";
         public static List<Item> confirmedItems = new List<Item>();
 
@@ -110,6 +121,28 @@ namespace UniversityCafeteria.Controllers
 
         }
 
+        //[HttpPost]
+        //public IActionResult ConfirmRequest()
+        //{
+        //    var request = new SupplyRequest();
+        //    request.SupplyItems.Add(new SupplyItem
+        //    {
+        //        ProductName = "Coffee",
+        //        Category = "Hot Drinks",
+        //        Quantity = 10,
+        //        UnitPrice = 3m,
+        //        Priority = "Urgent"
+        //    });
+
+        //    _db.SupplyRequests.Add(request);
+        //    _db.SaveChanges();                      // nothing is written until this line
+
+        //    return RedirectToAction("MyRequests");
+        //}
+
+
+
+
         [HttpPost]
         public IActionResult ClearDraft()
         {
@@ -142,6 +175,19 @@ namespace UniversityCafeteria.Controllers
         {
             return View(confirmedItems);
         }
+
+
+        //public IActionResult MyRequests()
+        //{
+        //    List<SupplyRequest> requests = _db.SupplyRequests
+        //        .Include(r => r.SupplyItems)       // load each request's products too
+        //        .ToList();
+
+        //    return View(requests);
+        //}
+
+
+
         public IActionResult About()
         {
             ViewBag.ApplicationName = "University Cafeteria Supply Management System";

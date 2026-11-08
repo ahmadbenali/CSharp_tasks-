@@ -1,5 +1,9 @@
 ﻿@using UniversityCafeteria.Models
 @model List<Item>
+
+@* @model List<SupplyRequest> *@
+
+
 @{
 }
 
@@ -19,9 +23,54 @@
             <td>@item.total</td>
             <td>@item.priority</td>
         </tr>
-    }
+    } 
+    
     <tr>
         <th colspan="4" class="text-end">Subtotal</th>
         <th colspan="2">@Model.Sum(x => x.total)</th>
     </tr>
 </table>
+
+@* @if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">No requests yet.</p>
+}
+
+@foreach (var request in Model)
+{
+    <h4 class="mt-4">
+        Request #@request.Id
+        <small class="text-muted">@request.CreatedAt.ToString("yyyy-MM-dd HH:mm")</small>
+    </h4>
+
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th>Priority</th>
+        </tr>
+        @foreach (var item in request.SupplyItems)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Category</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice</td>
+                <td>@(item.Quantity * item.UnitPrice)</td>
+                <td>@item.Priority</td>
+            </tr>
+        }
+        <tr>
+            <th colspan="4" class="text-end">Subtotal</th>
+            <th colspan="2">@request.SupplyItems.Sum(x => x.Quantity * x.UnitPrice)</th>
+        </tr>
+    </table>
+} *@

@@ -1,4 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using UniversityCafeteria.Data;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<CafeteriaDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDbContext<EmployeesDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeesConnection")));
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
