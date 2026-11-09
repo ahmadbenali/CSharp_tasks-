@@ -1,10 +1,18 @@
 
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.Arm;
 using UniversityCafeteria.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 public class CategoriesController : Controller
 {
+//4.	Edit(GET) : Display the selected category information.
+//5.	Edit(POST) : Update the selected category.
+//6.	Details: Display category details in a separate page.
+//7.	Delete: Delete the selected category.
+
     private readonly ApplicationDbContext _context;
 
     public CategoriesController(ApplicationDbContext context)
@@ -12,9 +20,10 @@ public class CategoriesController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index()    
+    public IActionResult Index()    
     {
-        return View(await _context.Category.ToListAsync());
+
+        return View(_context.Category.Include(c => c.Products).ToList());
     }
 
     public IActionResult Create()
@@ -25,19 +34,74 @@ public class CategoriesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Name,Description,Products")] Category category)
+    public IActionResult Create([Bind("Id,Name,Description")] Category category)
     {
         if (ModelState.IsValid)
         {
             _context.Add(category);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
         return View(category);
     }
 
-    private bool CategoryExists(int? id)
+    public IActionResult Edit(int? id)
     {
-        return _context.Category.Any(e => e.Id == id);
+        if (id == null || _context.Category == null)
+        {
+            return NotFound();
+        }
+        var category = _context.Category.Find(id);
+        if (category == null)
+        {
+            return NotFound();
+        }
+        return View(category);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(int id, [Bind("Id,Name,Description")] Category category)
+    {
+        if (id != category.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+           
+           _context.Category.Update(category);
+           _context.SaveChanges();
+         
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Details(int? id)
+    {
+        if (id == null || _context.Category == null)
+        {
+            return NotFound();
+        }
+        var category = _context.Category.Find(id);
+        if (category == null)
+        {
+            return NotFound();
+        }
+        return View(category);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(int id)
+    {
+        var category = _context.Category.Find(id);
+        if (category == null)
+        {
+            return NotFound();
+        }
+        _context.Category.Remove(category);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
     }
 }

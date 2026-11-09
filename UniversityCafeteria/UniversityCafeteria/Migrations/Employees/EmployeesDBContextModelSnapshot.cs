@@ -39,7 +39,42 @@ namespace UniversityCafeteria.Migrations.Employees
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("UniversityCafeteria.Models.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("HireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("UniversityCafeteria.Models.Product", b =>
@@ -52,6 +87,9 @@ namespace UniversityCafeteria.Migrations.Employees
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -72,7 +110,7 @@ namespace UniversityCafeteria.Migrations.Employees
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("UniversityCafeteria.Models.PurchaseOrder", b =>
@@ -97,7 +135,7 @@ namespace UniversityCafeteria.Migrations.Employees
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("PurchaseOrder");
+                    b.ToTable("PurchaseOrderes");
                 });
 
             modelBuilder.Entity("UniversityCafeteria.Models.PurchaseOrderItem", b =>
@@ -126,7 +164,7 @@ namespace UniversityCafeteria.Migrations.Employees
 
                     b.HasIndex("PurchaseOrderId");
 
-                    b.ToTable("PurchaseOrderItem");
+                    b.ToTable("PurchaseOrderItemes");
                 });
 
             modelBuilder.Entity("UniversityCafeteria.Models.Supplier", b =>
@@ -136,6 +174,9 @@ namespace UniversityCafeteria.Migrations.Employees
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -150,7 +191,39 @@ namespace UniversityCafeteria.Migrations.Employees
 
                     b.HasKey("Id");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("UniversityCafeteria.Models.order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("UniversityCafeteria.Models.Product", b =>
@@ -202,9 +275,25 @@ namespace UniversityCafeteria.Migrations.Employees
                     b.Navigation("PurchaseOrder");
                 });
 
+            modelBuilder.Entity("UniversityCafeteria.Models.order", b =>
+                {
+                    b.HasOne("UniversityCafeteria.Models.Employee", "Employee")
+                        .WithMany("Orders")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("UniversityCafeteria.Models.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("UniversityCafeteria.Models.Employee", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("UniversityCafeteria.Models.Product", b =>

@@ -12,11 +12,11 @@ public class SuppliersController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index()    
+    public IActionResult Index()
     {
-        return View(await _context.Supplier.ToListAsync());
+        return View(_context.Supplier.Include(s => s.Products).ToList());
     }
-    
+
     public IActionResult Create()
     {
         return View();
@@ -25,19 +25,73 @@ public class SuppliersController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Name,Email,Phone,Products,PurchaseOrders")] Supplier supplier)
+    public IActionResult Create([Bind("Id,Name,Phone,Email,Address")] Supplier supplier)
     {
         if (ModelState.IsValid)
         {
             _context.Add(supplier);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
         return View(supplier);
     }
 
-    private bool SupplierExists(int? id)
+    public IActionResult Edit(int? id)
     {
-        return _context.Supplier.Any(e => e.Id == id);
+        if (id == null || _context.Supplier == null)
+        {
+            return NotFound();
+        }
+        var supplier = _context.Supplier.Find(id);
+        if (supplier == null)
+        {
+            return NotFound();
+        }
+        return View(supplier);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(int id, [Bind("Id,Name,Phone,Email,Address")] Supplier supplier)
+    {
+        if (id != supplier.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            _context.Supplier.Update(supplier);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        return View(supplier);
+    }
+
+    public IActionResult Details(int? id)
+    {
+        if (id == null || _context.Supplier == null)
+        {
+            return NotFound();
+        }
+        var supplier = _context.Supplier.Find(id);
+        if (supplier == null)
+        {
+            return NotFound();
+        }
+        return View(supplier);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(int id)
+    {
+        var supplier = _context.Supplier.Find(id);
+        if (supplier == null)
+        {
+            return NotFound();
+        }
+        _context.Supplier.Remove(supplier);
+        _context.SaveChanges();
+        return RedirectToAction(nameof(Index));
     }
 }

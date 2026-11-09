@@ -8,11 +8,15 @@ namespace UniversityCafeteria.Data
     {
         public EmployeesDBContext(DbContextOptions<EmployeesDBContext> options)
        : base(options) { }
-        public DbSet<Product> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Product> Suppliers { get; set; }
-        public DbSet<Product> PurchaseOrderes { get; set; }
-        public DbSet<Product> PurchaseOrderItemes { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<PurchaseOrder> PurchaseOrderes { get; set; }
+        public DbSet<PurchaseOrderItem> PurchaseOrderItemes { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -13,6 +13,8 @@ public partial class Supplier
 
     public string? Phone { get; set; }
 
+    public string? Address { get; set; }
+
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 
     public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; } = new List<PurchaseOrder>();
