@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UniversityCafeteria.Data;
 
@@ -13,6 +14,14 @@ builder.Services.AddDbContext<EmployeesDBContext>(options =>
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationConnection")));
+
+// Identity: uses the existing Identity tables (AspNetUsers, AspNetRoles, AspNetUserRoles)
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.User.AllowedUserNameCharacters = ""; // the user name is the full name, so spaces are allowed
+})
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -38,6 +47,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSession();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -47,5 +57,33 @@ app.MapControllerRoute(
     pattern: "{controller=Cafeteria}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+// Create the 3 roles and one SuperAdmin account if they do not exist yet
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    foreach (var roleName in new[] { "User", "Admin", "SuperAdmin" })
+    {
+        if (!await roleManager.RoleExistsAsync(roleName))
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+
+    if (await userManager.FindByEmailAsync("superadmin@cafeteria.com") == null)
+    {
+        var superAdmin = new IdentityUser
+        {
+            UserName = "Super Admin",
+            Email = "superadmin@cafeteria.com"
+        };
+        var result = await userManager.CreateAsync(superAdmin, "SuperAdmin@123");
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(superAdmin, "SuperAdmin");
+        }
+    }
+}
 
 app.Run();

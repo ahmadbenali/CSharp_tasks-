@@ -1,0 +1,40 @@
+@using UniversityCafeteria.Models
+
+@{
+    ViewData["Title"] = "New Supply Request";
+    var products = (List<Product>)ViewBag.Products;
+}
+
+<h1>New Supply Request</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Price.ToString("0.00")</td>
+                    <td>@product.Quantity</td>
+                    <td>
+                        <input type="hidden" name="productIds" value="@product.Id" />
+                        <input type="number" name="quantities" value="0" min="0" max="@product.Quantity" class="form-control" style="width:100px" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <input type="submit" value="Send Request" class="btn btn-primary" />
+    <a asp-action="Requests">Back to list</a>
+</form>

@@ -1,9 +1,12 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UniversityCafeteria.Models;
 
+// any logged-in user can view products, only Admin and SuperAdmin can add, edit and delete
+[Authorize]
 public class ProductsController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -19,6 +22,7 @@ public class ProductsController : Controller
     }
 
 
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public IActionResult Create()
     {
         ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
@@ -28,6 +32,7 @@ public class ProductsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public IActionResult Create([Bind("Id,Name,Description,Price,Quantity,CategoryId,SupplierId")] Product product)
     {
         if (ModelState.IsValid)
@@ -41,6 +46,7 @@ public class ProductsController : Controller
         return View(product);
     }
 
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public IActionResult Edit(int? id)
     {
         if (id == null || _context.Product == null)
@@ -59,6 +65,7 @@ public class ProductsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public IActionResult Edit(int id, [Bind("Id,Name,Description,Price,Quantity,CategoryId,SupplierId")] Product product)
     {
         if (id != product.Id)
@@ -92,6 +99,7 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public IActionResult Delete(int id)
     {
         var product = _context.Product.Find(id);

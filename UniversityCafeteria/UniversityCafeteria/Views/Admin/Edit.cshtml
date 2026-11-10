@@ -1,0 +1,31 @@
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Change Role";
+    var user = (IdentityUser)ViewBag.User;
+    var roles = (List<IdentityRole>)ViewBag.Roles;
+    string? currentRole = ViewBag.CurrentRole;
+}
+
+<h1>Change Role</h1>
+
+<h4>@user.UserName (@user.Email)</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" name="userId" value="@user.Id" />
+            <div class="form-group mb-3">
+                <label class="control-label">Role</label>
+                <select name="roleName" class="form-control">
+                    @foreach (var role in roles)
+                    {
+                        <option value="@role.Name" selected="@(role.Name == currentRole)">@role.Name</option>
+                    }
+                </select>
+            </div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a asp-action="Index">Back to list</a>
+        </form>
+    </div>
+</div>
